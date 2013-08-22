@@ -6,5 +6,5 @@ while 1:
     os.system(cmd)
     cmd = "python examine.py ~/gmail-getmail/danbmil99.mbox"
     os.system(cmd)
-    time.sleep(600)
+    time.sleep(300)
     
