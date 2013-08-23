@@ -13,11 +13,13 @@ def run(*args, **kw):
             out = subprocess.check_output(*args, **kw)
         else:
             proc = subprocess.Popen(*args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            time.sleep(timeout)
-            if proc.poll() is None:
-                out = "__TIMEOUT__"
-            else:
-                out, err = proc.communicate()
+            t0 = time.time()
+            out = "__TIMEOUT__"
+            while time.time() < t0 + timeout:
+                if proc.poll() != None:
+                    out, err = proc.communicate()
+                    break
+                time.sleep(1.0)
 
     except subprocess.CalledProcessError as e:
         out = e.output
@@ -26,6 +28,6 @@ def run(*args, **kw):
 if __name__ == "__main__":
     print "test run.py"
     cmd = "ls", "-rltR", "/home/dbm/mp3"
-    s = run(cmd, timeout=10)
+    s = run(cmd, timeout=1)
     print "output----------\n", s
     print "end output------"
