@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #exam mbox archive for duplicates etc
 
 import os, sys, time
