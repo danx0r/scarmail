@@ -1,9 +1,9 @@
-import  subprocess, time, os
+import  subprocess, time, os, sys
 
 def run(*args, **kw):
     if 'timeout' in kw:
         timeout = float(kw['timeout'])
-        print "timeout:", timeout
+        print "running", args[0], "with timeout:", timeout,
         del kw['timeout']
     else:
         timeout = 0
@@ -18,8 +18,16 @@ def run(*args, **kw):
             while time.time() < t0 + timeout:
                 if proc.poll() != None:
                     out, err = proc.communicate()
+                    print
+                    sys.stdout.flush()
                     break
+                sys.stdout.write(".")
+                sys.stdout.flush()
                 time.sleep(1.0)
+            if out == "__TIMEOUT__":
+                proc.kill()
+                print
+                sys.stdout.flush()
 
     except subprocess.CalledProcessError as e:
         out = e.output
@@ -27,7 +35,7 @@ def run(*args, **kw):
 
 if __name__ == "__main__":
     print "test run.py"
-    cmd = "ls", "-rltR", "/home/dbm/mp3"
-    s = run(cmd, timeout=1.5)
+    cmd = "ls", "-rltR", "/home/dbm/"
+    s = run(cmd, timeout=4)
     print "output----------\n", s
     print "end output------"
