@@ -11,8 +11,10 @@ dates = {}
 cnt = 0
 resent = 0
 f = open(mbox)
-for line in f.readlines():
-    line = line.rstrip()
+lineraw = None
+while lineraw != "":
+    lineraw = f.readline()
+    line = lineraw.rstrip()
     if line.find("Message-ID: <") == 0:
         ids[line[line.find('<'):]] = 1
         cnt += 1
