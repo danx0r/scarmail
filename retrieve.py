@@ -4,7 +4,9 @@
 import os, sys, time, run
 while 1:
     cmd = "getmail"
-    run.run(cmd, timeout=30)
+    out = run.run(cmd, timeout=300)
+    print out
+    sys.stdout.flush()
     cmd = "./examine.py ~/gmail-getmail/danbmil99.mbox"
     os.system(cmd)
     time.sleep(300)
