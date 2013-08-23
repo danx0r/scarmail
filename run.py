@@ -28,6 +28,6 @@ def run(*args, **kw):
 if __name__ == "__main__":
     print "test run.py"
     cmd = "ls", "-rltR", "/home/dbm/mp3"
-    s = run(cmd, timeout=1)
+    s = run(cmd, timeout=1.5)
     print "output----------\n", s
     print "end output------"
