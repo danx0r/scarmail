@@ -10,7 +10,7 @@ def parsedate(line):
     while len(line) > 6:
 ##        print "-->" + line
         try:
-            line = quopri.decodestring(line.replace("=A0","")).strip()
+            line = quopri.decodestring(line.replace("=A0","").replace("=C2","")).strip()
         except:
             pass
         try:
@@ -26,7 +26,7 @@ def parsedate(line):
     print "messed up dateline:", orig
     return None
 
-##x="=A0Mon Jul 27, 2009 5"
+##x="=C2=A0 Sunday January 8, 2012"
 ##print parsedate(x)
 ##exit()
 
