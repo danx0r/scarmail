@@ -3,6 +3,32 @@
 
 import os, sys, time
 import dateutil.parser as dp
+import quopri
+
+def parsedate(line):
+    orig = line
+    while len(line) > 6:
+##        print "-->" + line
+        try:
+            line = quopri.decodestring(line.replace("=A0","")).strip()
+        except:
+            pass
+        try:
+            date = dp.parse(line)
+        except:
+            try:
+                line = (line.replace('-',' ').replace('/',' ').replace("&nbsp;", " ")).strip()
+                date = dp.parse(line)
+            except:
+                line = line[:-1]
+                continue
+        return date
+    print "messed up dateline:", orig
+    return None
+
+##x="=A0Mon Jul 27, 2009 5"
+##print parsedate(x)
+##exit()
 
 mbox = sys.argv[1]
 
@@ -40,14 +66,10 @@ while lineraw != "":
         if k == -1:
             k = j
         j = min(j, k)
-        try:
-            date = dp.parse(line[i:j])
-        except:
-            try:
-                date = dp.parse(line[i:j].replace('-',' ').replace("=2C"," ").replace("&nbsp;", " "))
-            except:
-                print "messed up dateline:", line
-                continue
+        line = line[i:j].strip()
+        date = parsedate(line)
+        if date == None:
+            continue
         month = date.month
         year = date.year
         key = str(year) + "_" + ("%02d" % month)
