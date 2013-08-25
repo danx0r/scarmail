@@ -3,13 +3,19 @@
 
 import os, sys, time, run
 
-HOUR = 19
+HOUR = None
+if len(sys.argv) > 1:
+    HOUR = int(sys.argv[1])
+    print "will activate at hour", HOUR
+else:
+    print "starting now"
+
 WAIT = 300
 WAIT2 = 600
 done = False
 while 1:
     hour = time.localtime().tm_hour
-    if hour == HOUR and done == False:
+    if HOUR == None or (hour == HOUR and done == False):
         print "Waking up to download some messages"
         while 1:
             cmd = "getmail"
