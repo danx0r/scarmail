@@ -10,8 +10,10 @@ if len(sys.argv) > 1:
 else:
     print "starting now"
 
-WAIT = 300
+WAIT = 1800
+WAIT1 = 300
 WAIT2 = 600
+
 done = False
 while 1:
     hour = time.localtime().tm_hour
@@ -19,8 +21,8 @@ while 1:
         print "Waking up to download some messages"
         while 1:
             cmd = "getmail"
-            out = run.run(cmd, timeout=300)
-            print out
+            out, complete = run.run(cmd, timeout=WAIT, showoutput=True)
+            print "completed without timeout:", complete
             words = out.split("\n")
             count = None
             for i in range(-1,max(-5, -len(words)), -1):
@@ -37,7 +39,7 @@ while 1:
                 break
             else:
                 print "Sleeping a bit but planning to download more"
-            time.sleep(WAIT)
+            time.sleep(WAIT1)
     else:
         if done:
             print "Sleeping until tomorrow"
