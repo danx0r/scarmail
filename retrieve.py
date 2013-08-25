@@ -17,7 +17,7 @@ while 1:
             print out
             words = out.split("\n")
             count = None
-            for i in range(-1,max(-5, -len(words), -1):
+            for i in range(-1,max(-5, -len(words)), -1):
                 if words[i].find("Retrieved") == 0:
                     count = int(words[i].split()[1])
                     break
