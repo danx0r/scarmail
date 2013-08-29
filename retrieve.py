@@ -29,6 +29,9 @@ while 1:
                 if words[i].find("Retrieved") == 0:
                     count = int(words[i].split()[1])
                     break
+                if words[i].find("retrieved") >= 0:
+                    count = int(words[i].split()[0])
+                    break
             print count, "messages downloaded"
             sys.stdout.flush()
         ##    cmd = "./examine.py ~/gmail-getmail/danbmil99.mbox"
