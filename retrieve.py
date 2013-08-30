@@ -37,14 +37,14 @@ while 1:
         ##    cmd = "./examine.py ~/gmail-getmail/danbmil99.mbox"
         ##    os.system(cmd)
             if count == 0:
-                print "All messages downloaded, sleeping until tomorrow"
+                print "All messages downloaded, sleeping until", HOUR
                 done = True
                 break
             else:
                 print "Sleeping a bit but planning to download more"
             time.sleep(WAIT1)
-    else:
-        if done:
-            print "Sleeping until tomorrow"
-        done = False
+##    else:
+##        if done:
+##            print "Sleeping until tomorrow"
+##        done = False
     time.sleep(WAIT2)
