@@ -43,8 +43,8 @@ while 1:
             else:
                 print time.ctime(), "Sleeping a bit but planning to download more"
             time.sleep(WAIT1)
-##    else:
-##        if done:
-##            print "Sleeping until tomorrow"
-##        done = False
+    else:
+        if done:
+            print time.ctime(), "Sleeping until tomorrow"
+        done = False
     time.sleep(WAIT2)
