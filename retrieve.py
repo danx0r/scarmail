@@ -18,11 +18,11 @@ done = False
 while 1:
     hour = time.localtime().tm_hour
     if HOUR == None or (hour == HOUR and done == False):
-        print "Waking up to download some messages"
+        print time.ctime(), "Waking up to download some messages"
         while 1:
             cmd = "getmail"
             out, complete = run.run(cmd, timeout=WAIT, showoutput=True)
-            print "completed without timeout:", complete
+            print time.ctime(), "completed without timeout:", complete
             words = out.split("\n")
             count = None
             for i in range(-1,max(-5, -len(words)), -1):
@@ -32,16 +32,16 @@ while 1:
                 if words[i].find("retrieved") >= 0:
                     count = int(words[i].split()[0])
                     break
-            print count, "messages downloaded"
+            print time.ctime(), count, "messages downloaded"
             sys.stdout.flush()
         ##    cmd = "./examine.py ~/gmail-getmail/danbmil99.mbox"
         ##    os.system(cmd)
             if count == 0:
-                print "All messages downloaded, sleeping until", HOUR
+                print time.ctime(), "All messages downloaded, sleeping until", HOUR
                 done = True
                 break
             else:
-                print "Sleeping a bit but planning to download more"
+                print time.ctime(), "Sleeping a bit but planning to download more"
             time.sleep(WAIT1)
 ##    else:
 ##        if done:
