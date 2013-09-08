@@ -17,9 +17,10 @@ WAIT2 = 600
 done = False
 while 1:
     hour = time.localtime().tm_hour
-    if HOUR == None or (hour == HOUR and done == False):
+    if (HOUR == None) or (hour == HOUR and done == False):
         print time.ctime(), "Waking up to download some messages"
         while 1:
+            print time.ctime(), "inner loop"
             cmd = "getmail"
             out, complete = run.run(cmd, timeout=WAIT, showoutput=True)
             print time.ctime(), "completed without timeout:", complete
@@ -43,8 +44,7 @@ while 1:
             else:
                 print time.ctime(), "Sleeping a bit but planning to download more"
             time.sleep(WAIT1)
-    else:
-        if done:
-            print time.ctime(), "Sleeping until tomorrow"
+    if (HOUR != None) and (hour != HOUR):
         done = False
+        print time.ctime(), "The hour is past! See you tomorrow"
     time.sleep(WAIT2)
