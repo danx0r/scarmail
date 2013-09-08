@@ -44,7 +44,7 @@ while 1:
             else:
                 print time.ctime(), "Sleeping a bit but planning to download more"
             time.sleep(WAIT1)
-    if (HOUR != None) and (hour != HOUR):
+    if done and (HOUR != None) and (hour != HOUR):
         done = False
         print time.ctime(), "The hour is past! See you tomorrow"
     time.sleep(WAIT2)
